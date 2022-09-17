@@ -1,10 +1,15 @@
 const express = require("express");
 const dotenv = require("dotenv").config()
+const morgan = require("morgan")
 const connectDB = require('./config/db');
 
 connectDB()
 
 const app = express()
+
+if(process.env.MODE=='development'){
+    app.use(morgan('dev'))
+}
 
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
