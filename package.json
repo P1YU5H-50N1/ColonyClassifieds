@@ -23,7 +23,8 @@
     "express-async-handler": "^1.2.0",
     "mongoose": "^6.6.1",
     "morgan": "^1.10.0",
-    "passport": "^0.6.0"
+    "passport": "^0.6.0",
+    "web-push": "^3.5.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
