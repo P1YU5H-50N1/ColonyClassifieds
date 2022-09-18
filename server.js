@@ -4,6 +4,7 @@ const morgan = require("morgan")
 const connectDB = require('./config/db');
 const authRouter = require('./services/auth/auth.Routes')
 const classifiedsRouter = require('./services/classifieds/classifieds.Routes')
+const biddingRouter = require('./services/bidding/bidding.Routes')
 
 connectDB()
 
@@ -17,7 +18,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use('/api/auth',authRouter)
 app.use('/api/classified',classifiedsRouter)
-
+app.use('/api/bid',biddingRouter)
 
 const port = process.env.PORT || 5000
 
