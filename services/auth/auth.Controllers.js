@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 const User = require("./models/userModel");
+const {issueJWT} = require("./utils/utils")
 
 //@desc Register User
 //@route POST /api/auth/register
@@ -29,10 +30,12 @@ const register = asyncHandler(async (req, res) => {
 	});
 
 	if (user) {
+		const jwt = issueJWT(user)
 		res.status(201).json({
 			_id: user.id,
 			name: user.name,
 			email: user.email,
+			jwt
 		});
 	} else {
 		res.status(400);
@@ -50,10 +53,14 @@ const login = asyncHandler(async (req, res) => {
 	const user = await User.findOne({ email });
 
 	if (user && (await bcrypt.compare(password, user.password))) {
+		
+		const jwt = issueJWT(user)
+		
 		res.json({
 			_id: user.id,
 			name: user.name,
 			email: user.email,
+			jwt
 		});
 	} else {
 		res.status(400);
