@@ -25,9 +25,15 @@ const ClassifiedSchema = mongoose.Schema({
 	},
 	bids: [
 		{
-			type: mongoose.Schema.Types.ObjectId,
-			required: true,
-			// ref: "Bid",
+			user: {
+				type: mongoose.Schema.Types.ObjectId,
+				required: true,
+				ref: "User",
+			},
+			price: {
+				type: Number,
+				required: [true, "Please add a bid price"],
+			},
 		},
 	],
 	more_bids: {
