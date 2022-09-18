@@ -21,9 +21,6 @@ const UserSchema = mongoose.Schema(
 			required: [true, "Add a location"],
 		},
 	},
-	{
-		timestamps: true,
-	}
 );
 
 module.exports = mongoose.model("User", UserSchema);
