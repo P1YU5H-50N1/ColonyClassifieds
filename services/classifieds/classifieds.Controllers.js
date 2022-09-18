@@ -28,7 +28,10 @@ const postClassified = asyncHandler(async (req, res) => {
 		},
 	};
 
-	const audience = await User.find(geoQuery).limit(50);
+	const audience = await (
+		await User.find(geoQuery).limit(50)
+	).filter((user) => !user.equals(req.user));
+	
 	const more_audience = await User.find(geoQuery).skip(50); //this can be a batch job while scaling
 
 	const classified = await Classified.create({
@@ -45,7 +48,7 @@ const postClassified = asyncHandler(async (req, res) => {
 		const extended_audience = more_audience.map((user) => {
 			user, classified;
 		});
-		await Audience.insertMany(extended_audience)
+		await Audience.insertMany(extended_audience);
 	}
 
 	res.status(200).json({
