@@ -4,11 +4,14 @@ const Audience = require("../../models/audienceModel");
 const User = require("../../models/userModel");
 
 const getClassifieds = asyncHandler(async (req, res) => {
-	const classifieds = await Classified.find({ audience: req.user });
+	const classifieds = await Classified.find(
+		{ audience: req.user },
+		"_id owner title description"
+	).populate("owner","_id name");
 	const audience_classifieds = await Audience.find(
 		{ user: req.user },
 		"classified"
-	).populate("classified");
+	).populate("classified", "_id owner title description");
 	res.status(200).json({
 		message: "get Classifieds",
 		classifieds,
