@@ -1,6 +1,8 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
 const morgan = require("morgan");
+const passport = require("passport");
+const { JWTStrategy } = require("./config/passport");
 const connectDB = require("./config/db");
 const setNotifierKeys = require("./config/notifier");
 const { errorHandler } = require("./middlewares/errorMiddlerware");
@@ -13,6 +15,7 @@ connectDB();
 setNotifierKeys();
 
 const app = express();
+passport.use(JWTStrategy);
 
 if (process.env.MODE == "development") {
 	app.use(morgan("dev"));
@@ -21,9 +24,23 @@ if (process.env.MODE == "development") {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/api/auth", authRouter);
-app.use("/api/classified", classifiedsRouter);
-app.use("/api/bid", biddingRouter);
-app.use("/api/notifier", notifierRouter);
+app.use(
+	"/api/classified",
+	passport.authenticate("jwt", { session: false }),
+	classifiedsRouter
+);
+
+app.use(
+	"/api/bid",
+	passport.authenticate("jwt", { session: false }),
+	biddingRouter
+);
+
+app.use(
+	"/api/notifier",
+	passport.authenticate("jwt", { session: false }),
+	notifierRouter
+);
 
 app.use(errorHandler);
 
