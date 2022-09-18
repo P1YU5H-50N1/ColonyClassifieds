@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const pointSchema = require("./pointModel")
+const pointSchema = require("./pointModel");
 
 const UserSchema = mongoose.Schema(
 	{
@@ -18,7 +18,7 @@ const UserSchema = mongoose.Schema(
 		},
 		location: {
 			type: pointSchema,
-            required: [true, "Add a location"]
+			required: [true, "Add a location"],
 		},
 	},
 	{

@@ -1,10 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const {
-    acceptBid,allBids,postBid
-} = require('./bidding.Controllers')
+const { acceptBid, allBids, postBid } = require("./bidding.Controllers");
 
+router.route("/").get(allBids).post(postBid).put(acceptBid);
 
-router.route('/').get(allBids).post(postBid).put(acceptBid)
-
-module.exports = router
+module.exports = router;
