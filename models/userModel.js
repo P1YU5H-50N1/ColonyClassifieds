@@ -19,8 +19,10 @@ const UserSchema = mongoose.Schema(
 		location: {
 			type: pointSchema,
 			required: [true, "Add a location"],
+			index: '2dsphere',
 		},
 	},
 );
+UserSchema.index({location: '2dsphere'});
 
 module.exports = mongoose.model("User", UserSchema);
