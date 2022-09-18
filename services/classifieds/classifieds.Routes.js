@@ -5,7 +5,12 @@ const {
 	postClassified,
 	editClassified,
 } = require("./classifieds.Controllers");
+const { ClassifiedValidator } = require("./validators/classifieds.Validators");
 
-router.route("/").get(getClassifieds).post(postClassified).put(editClassified);
+router
+	.route("/")
+	.get(getClassifieds)
+	.post(ClassifiedValidator, postClassified)
+	.put(ClassifiedValidator, editClassified);
 
 module.exports = router;
