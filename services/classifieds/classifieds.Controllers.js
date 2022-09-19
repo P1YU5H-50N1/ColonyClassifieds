@@ -2,12 +2,13 @@ const asyncHandler = require("express-async-handler");
 const Classified = require("../../models/classifiedModel");
 const Audience = require("../../models/audienceModel");
 const User = require("../../models/userModel");
+const Bid = require("../../models/bidModel");
 
 const getClassifieds = asyncHandler(async (req, res) => {
 	const classifieds = await Classified.find(
 		{ audience: req.user },
 		"_id owner title description"
-	).populate("owner","_id name");
+	).populate("owner", "_id name");
 	const audience_classifieds = await Audience.find(
 		{ user: req.user },
 		"classified"
@@ -22,6 +23,13 @@ const getClassifieds = asyncHandler(async (req, res) => {
 const editClassified = asyncHandler((req, res) => {
 	res.status(200).json({
 		message: "edit Classified",
+	});
+});
+
+const myClassifieds = asyncHandler(async (req, res) => {
+	const classifieds = await Classified.find({ owner: req.user._id }).populate("bids");
+	res.status(200).json({
+		classifieds,
 	});
 });
 
@@ -64,8 +72,8 @@ const postClassified = asyncHandler(async (req, res) => {
 	}
 
 	res.status(200).json({
-		message: "post Classified",
-		ad: classified,
+		message: "Classified Posted Successfully",
+		// ad: classified,
 	});
 });
 
@@ -73,4 +81,5 @@ module.exports = {
 	getClassifieds,
 	postClassified,
 	editClassified,
+	myClassifieds,
 };

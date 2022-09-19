@@ -22,7 +22,6 @@ const acceptBid = asyncHandler(async (req, res) => {
 		throw new Error("Bid doesn't exist");
 	}
 	const del_classified = await Classified.findByIdAndDelete(classified_id);
-	console.log(del_classified)
 	const {
 		_id,
 		owner,
@@ -43,9 +42,9 @@ const acceptBid = asyncHandler(async (req, res) => {
 		acceptedBid: bid,
 	});
 	res.status(200).json({
-		message: "Accept Bid for a classified and move to archive",
-		del_classified,
-		archived
+		message: "Bid Accepted",
+		// del_classified,
+		// archived,
 	});
 });
 const allBids = asyncHandler(async (req, res) => {
@@ -88,15 +87,17 @@ const postBid = asyncHandler(async (req, res) => {
 		classified.bids.push(bid._id);
 		const saved_classified = await classified.save();
 		res.status(201).json({
-			message: "post Bid",
-			bid: saved_classified.bids,
+			message:
+				"We'll notify if your bid is accepted. In the meantime, you can submit another bid",
+			// bid: saved_classified.bids,
+		});
+	} else {
+		res.status(201).json({
+			message:
+				"We'll notify if your bid is accepted. In the meantime, you can submit another bid",
+			// bid,
 		});
 	}
-
-	res.status(201).json({
-		message: "post Bid",
-		bid,
-	});
 });
 
 module.exports = {
