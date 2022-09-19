@@ -1,8 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { postBidValidator } = require("./validators/bidding.Validators");
+const {
+	postBidValidator,
+	getBidsValidator,
+} = require("./validators/bidding.Validators");
 const { acceptBid, allBids, postBid } = require("./bidding.Controllers");
 
-router.route("/").get(allBids).post(postBidValidator, postBid).put(acceptBid);
+router.route("/").post(postBidValidator, postBid).put(acceptBid);
+router.get("/:classified_id", getBidsValidator, allBids);
 
 module.exports = router;
