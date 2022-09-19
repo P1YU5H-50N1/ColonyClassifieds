@@ -60,8 +60,7 @@ const Login = () => {
 							>
 								Terraformer
 							</a>
-							<br/>
-							Some APIs are not integrated so there is missing functionality
+							
 						</p>
 					</div>
 					<form
