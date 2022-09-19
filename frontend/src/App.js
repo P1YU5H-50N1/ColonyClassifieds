@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toast";
 import Protect from "./components/Protect";
 import Header from "./components/Header";
 import Register from "./pages/Register";
+import Classifieds from "./pages/Classifieds";
 
 function App() {
 	return (
@@ -18,7 +19,7 @@ function App() {
 							path="/"
 							element={
 								<Protect>
-									<div>This APIs are not integrated right now</div>
+									<Classifieds/>
 								</Protect>
 							}
 						/>
