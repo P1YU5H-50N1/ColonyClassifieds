@@ -16,7 +16,7 @@ const Header = () => {
 	};
 
 	return ["/login", "/register"].includes(window.location.pathname) ? null : (
-		<div className="mx-auto max-w-7xl px-40 sm:px-6 bg-white flex justify-between border-b-2 border-gray-100 py-6 items-center">
+		<div className="mx-auto w-screen px-40 sm:px-6 bg-white flex justify-between border-b-2 border-gray-100 py-6 items-center">
 			<div className="ml-8">
 				<CubeTransparentIcon className="mx-auto h-10 w-auto text-sky-500" />
 			</div>
