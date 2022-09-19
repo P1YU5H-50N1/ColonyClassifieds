@@ -33,8 +33,9 @@ const Classifieds = () => {
 	}
 	return (
 		<div className="container flex flex-col gap-5 mx-auto px-20 pt-5 pb-20">
-			{classifieds.map(({ title, description, owner }) => (
+			{classifieds.map(({ title, description, owner,_id }) => (
 				<ClassifiedCard
+                    key={_id}
 					title={title}
 					author={owner.name}
 					description={description}
