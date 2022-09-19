@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
+const path = require("path");
 const morgan = require("morgan");
 const passport = require("passport");
 const { JWTStrategy } = require("./config/passport");
@@ -41,6 +42,18 @@ app.use(
 	passport.authenticate("jwt", { session: false }),
 	notifierRouter
 );
+
+if (process.env.MODE === "production") {
+	app.use(express.static(path.join(__dirname, "/frontend/build")));
+
+	app.get("*", (req, res) =>
+		res.sendFile(
+			path.resolve(__dirname, "frontend", "build", "index.html")
+		)
+	);
+} else {
+	app.get("/", (req, res) => res.send("Please set to production"));
+}
 
 app.use(errorHandler);
 
