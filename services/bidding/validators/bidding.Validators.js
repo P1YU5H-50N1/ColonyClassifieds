@@ -1,4 +1,4 @@
-const { postBidSchema,getBidSchema } = require("./bidding.ValidatorSchema");
+const { postBidSchema,getBidSchema,acceptBidSchema } = require("./bidding.ValidatorSchema");
 
 const postBidValidator = (req, res, next) => {
 	const payload = {
@@ -26,4 +26,18 @@ const getBidsValidator = (req, res, next) => {
 		next();
 	}
 };
-module.exports = { postBidValidator, getBidsValidator };
+
+const acceptBidValidator =  (req, res, next) => {
+	const payload = {
+		classified_id:req.body.classified_id,
+		bid_id: req.body.bid_id
+	}
+	const { error } = acceptBidSchema.validate(payload);
+	if (error) {
+		res.status(406);
+		throw new Error(error.details[0].message);
+	} else {
+		next();
+	}
+};
+module.exports = { postBidValidator, getBidsValidator,acceptBidValidator };
