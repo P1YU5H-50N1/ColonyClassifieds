@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv").config();
 const path = require("path");
 const morgan = require("morgan");
+const cors = require('cors');
 const passport = require("passport");
 const { JWTStrategy } = require("./config/passport");
 const connectDB = require("./config/db");
@@ -20,6 +21,7 @@ passport.use(JWTStrategy);
 
 if (process.env.MODE == "development") {
 	app.use(morgan("dev"));
+	app.use(cors())
 }
 
 app.use(express.json());
