@@ -7,6 +7,8 @@ import Protect from "./components/Protect";
 import Header from "./components/Header";
 import Register from "./pages/Register";
 import Classifieds from "./pages/Classifieds";
+import MyClassifieds from "./pages/MyClassifieds";
+import PostClassified from "./pages/PostClassified";
 
 function App() {
 	return (
@@ -20,6 +22,22 @@ function App() {
 							element={
 								<Protect>
 									<Classifieds/>
+								</Protect>
+							}
+						/>
+						<Route
+							path="/myClassifieds"
+							element={
+								<Protect>
+									<MyClassifieds/>
+								</Protect>
+							}
+						/>
+						<Route
+							path="/new"
+							element={
+								<Protect>
+									<PostClassified/>
 								</Protect>
 							}
 						/>

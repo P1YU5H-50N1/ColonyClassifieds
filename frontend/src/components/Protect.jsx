@@ -16,9 +16,6 @@ const Protect = ({ children }) => {
 		if (isError) {
 			toast.error(message);
 		}
-		if (isSuccess || user) {
-			navigate("/");
-		}
 		dispatch(reset());
 	}, [user, isError, isSuccess, message, navigate, dispatch]);
 

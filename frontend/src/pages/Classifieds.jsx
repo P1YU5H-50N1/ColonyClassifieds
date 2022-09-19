@@ -1,13 +1,11 @@
 import React from "react";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getClassifieds, reset } from "../features/classified/classifiedSlice";
 import Spinner from "../components/Spinner";
 import ClassifiedCard from "../components/ClassifiedCard";
 
 const Classifieds = () => {
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const { user } = useSelector((state) => state.auth);
@@ -15,7 +13,6 @@ const Classifieds = () => {
 		(state) => state.classifieds
 	);
 	useEffect(() => {
-		console.log([user, navigate, isError, message, dispatch]);
 		if (isError) {
 			console.log(message);
 		}
@@ -26,7 +23,7 @@ const Classifieds = () => {
 		return () => {
 			dispatch(reset());
 		};
-	}, [user, navigate, isError, message, dispatch]);
+	}, [user, isError, message, dispatch]);
 
 	if (isLoading) {
 		return <Spinner />;
@@ -37,7 +34,9 @@ const Classifieds = () => {
 				<ClassifiedCard
                     key={_id}
 					title={title}
+                    classified_id={_id}
 					author={owner.name}
+                    token={user.jwt.token}
 					description={description}
 				/>
 			))}

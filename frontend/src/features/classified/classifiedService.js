@@ -2,7 +2,7 @@ import axios from "axios";
 
 const PREFIX =
 	process.env.NODE_ENV === "development" ? "http://localhost:5000" : "";
-const API_URL = `${PREFIX}/api/classified`;
+export const API_URL = `${PREFIX}/api`;
 
 const getClassifieds = async (token) => {
 	const config = {
@@ -10,9 +10,22 @@ const getClassifieds = async (token) => {
 			Authorization: token,
 		},
 	};
-	const response = await axios.get(API_URL, config);
-	return [...response.data.classifieds,...response.data.audience_classifieds];
+	const response = await axios.get(API_URL + "/classified", config);
+	return [
+		...response.data.classifieds,
+		...response.data.audience_classifieds,
+	];
 };
-const classifiedService = { getClassifieds };
+const myClassifieds = async (token) => {
+	const config = {
+		headers: {
+			Authorization: token,
+		},
+	};
+	console.log(config)
+	const response = await axios.get(API_URL + "/classified/myClassifieds", config);
+	return response.data.classifieds;
+};
+const classifiedService = { getClassifieds, myClassifieds };
 
 export default classifiedService;

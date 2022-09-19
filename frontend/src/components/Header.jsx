@@ -20,7 +20,31 @@ const Header = () => {
 			<div className="ml-8">
 				<CubeTransparentIcon className="mx-auto h-10 w-auto text-sky-500" />
 			</div>
-			<div className="mr-8 flex items-center">
+			<div className="mr-8 flex gap-5 items-center">
+				{window.location.pathname !== "/new" ? (
+					<Link
+						className="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+						to="/new"
+					>
+						Post Classified
+					</Link>
+				) : null}
+				{window.location.pathname !== "/myClassifieds" ? (
+					<Link
+						className="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+						to="/myClassifieds"
+					>
+						My Classifieds
+					</Link>
+				) : null}
+				{window.location.pathname !== "/" ? (
+					<Link
+						className="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+						to="/"
+					>
+						All Classifieds
+					</Link>
+				) : null}
 				{user ? (
 					<button
 						onClick={onLogout}
