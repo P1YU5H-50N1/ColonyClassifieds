@@ -19,7 +19,7 @@ setNotifierKeys();
 const app = express();
 passport.use(JWTStrategy);
 
-if (process.env.MODE == "development") {
+if (process.env.MODE === "development") {
 	app.use(morgan("dev"));
 	app.use(cors())
 }
