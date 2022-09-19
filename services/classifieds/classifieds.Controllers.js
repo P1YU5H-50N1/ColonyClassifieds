@@ -59,7 +59,7 @@ const postClassified = asyncHandler(async (req, res) => {
 			user,
 			classified,
 		}));
-		const audiences = await Audience.insertMany(extended_audience);
+		const audiences = await Audience.create(extended_audience);
 		console.log(audiences);
 	}
 
