@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const pointSchema = require("./pointModel");
 
-const ClassifiedSchema = mongoose.Schema({
+const ArchivedClassifiedSchema = mongoose.Schema({
 	owner: {
 		type: mongoose.Schema.Types.ObjectId,
 		required: true,
@@ -15,13 +15,14 @@ const ClassifiedSchema = mongoose.Schema({
 		type: String,
 		required: [true, "Please add a description"],
 	},
-	location: {
-		type: pointSchema,
-		required: [true, "Add a location"],
-	},
 	broadcast_radius: {
 		type: Number,
 		required: [true, "Please add a broadcast radius"],
+	},
+	acceptedBid: {
+		type: mongoose.Schema.Types.ObjectId,
+		required: true,
+		ref: "Bid",
 	},
 	bids: [
 		{
@@ -34,17 +35,6 @@ const ClassifiedSchema = mongoose.Schema({
 		type: Boolean,
 		default: false,
 	},
-	audience: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			required: true,
-			ref: "User",
-		},
-	],
-	more_audience: {
-		type: Boolean,
-		default: false,
-	},
 });
 
-module.exports = mongoose.model("Classified", ClassifiedSchema);
+module.exports = mongoose.model("ArchivedClassified", ArchivedClassifiedSchema);
