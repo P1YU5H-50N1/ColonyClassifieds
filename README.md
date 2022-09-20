@@ -23,7 +23,6 @@ SOLUTION: Used extended reference pattern in schema design for classified
 ##### Frontend
 1. Classifieds route and my Classifieds will need pagination on scale
 2. Forms can be improved for UX
-3. Push Notifications not working in production
 
 ### How it will scale
 
