@@ -17,8 +17,16 @@ const Header = () => {
 
 	return ["/login", "/register"].includes(window.location.pathname) ? null : (
 		<div className="mx-auto w-screen px-40 sm:px-6 bg-white flex justify-between border-b-2 border-gray-100 py-6 items-center">
-			<div className="ml-8">
+			<div className="ml-8 flex items-center gap-4">
 				<CubeTransparentIcon className="mx-auto h-10 w-auto text-sky-500" />
+				<p className="text-sky-500 font-semibold text-md leading-6">
+					{window.location.pathname === "/myClassifieds" ? (
+						My Classifieds
+					) : null}
+					{window.location.pathname === "/" ? (
+						All Classifieds
+					) : null}
+				</p>
 			</div>
 			<div className="mr-8 flex gap-5 items-center">
 				{window.location.pathname !== "/new" ? (
