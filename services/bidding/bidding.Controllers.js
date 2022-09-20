@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const Bid = require("../../models/bidModel");
 const ArchivedClassified = require("../../models/archivedClassifiedModel");
 const Classified = require("../../models/classifiedModel");
+const Notification = require("../../models/notificationModel");
 
 const acceptBid = asyncHandler(async (req, res) => {
 	const { classified_id, bid_id } = req.body;
@@ -41,6 +42,13 @@ const acceptBid = asyncHandler(async (req, res) => {
 		more_bids,
 		acceptedBid: bid,
 	});
+
+	const notification = await Notification.create({
+		classified: archived,
+		user: bid.user,
+		message: "Your Bid has been accepted",
+	});
+	console.log(notification)
 	res.status(200).json({
 		message: "Bid Accepted",
 		// del_classified,
