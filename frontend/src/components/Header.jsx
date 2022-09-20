@@ -21,10 +21,10 @@ const Header = () => {
 				<CubeTransparentIcon className="mx-auto h-10 w-auto text-sky-500" />
 				<p className="text-sky-500 font-semibold text-md leading-6">
 					{window.location.pathname === "/myClassifieds" ? (
-						My Classifieds
+						"My Classifieds"
 					) : null}
 					{window.location.pathname === "/" ? (
-						All Classifieds
+						"All Classifieds"
 					) : null}
 				</p>
 			</div>
